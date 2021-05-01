@@ -1,0 +1,32 @@
+---
+- name: Install zrepl repository key
+  apt_key:
+    id: E101418FD3D6FBCB9D65A62D708699FC5F2EBF16
+    url: https://zrepl.cschwarz.com/apt/apt-key.asc
+    keyring: /etc/apt/trusted.gpg.d/zrepl.gpg
+    state: present
+
+- name: Determine dpkg architecture
+  command: dpkg --print-architecture
+  register: __zrepl_dpkg_architecture
+  changed_when: false
+  check_mode: no
+
+- name: Install zrepl package repository
+  apt_repository:
+    repo: "deb [arch={{ __zrepl_dpkg_architecture.stdout|trim }}] https://zrepl.cschwarz.com/apt/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} main"
+    state: present
+
+- name: Install zrepl
+  apt:
+    name: zrepl
+    state: present
+    update_cache: yes
+
+- name: Divert zrepl configuration file
+  command: >
+    dpkg-divert --quiet --local --divert
+    /etc/zrepl/zrepl.yml.dpkg-divert
+    --rename /etc/zrepl/zrepl.yml
+  args:
+    creates: /etc/zrepl/zrepl.yml.dpkg-divert

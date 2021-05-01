@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure zrepl is installed
+      stat:
+        path: /usr/bin/zrepl
+      register: result
+      changed_when: false
+      failed_when: result.stat.isreg is not defined or not result.stat.isreg
+
+    - name: Ensure zrepl is running
+      command: pgrep -x zrepl
+      changed_when: false
+
+    - name: Ensure test configuration has been applied
+      command: zrepl status --mode dump --job test_sink 
+      changed_when: false

@@ -1,0 +1,9 @@
+---
+- name: check and restart zrepl
+  command: zrepl configcheck
+  notify: restart zrepl
+
+- name: restart zrepl
+  service:
+    name: zrepl
+    state: restarted

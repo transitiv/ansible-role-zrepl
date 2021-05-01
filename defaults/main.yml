@@ -1,0 +1,9 @@
+---
+zrepl_config_global:
+  logging:
+    - type: syslog
+      format: human
+      level: warn
+zrepl_config_jobs: []
+zrepl_service_enabled: yes
+zrepl_service_state: started

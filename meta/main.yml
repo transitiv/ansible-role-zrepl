@@ -1,0 +1,32 @@
+---
+galaxy_info:
+  role_name: zrepl
+  namespace: transitiv
+  author: Adam James (atj)
+  description: Installs and configures zrepl from the offical package repositories.
+  company: Transitiv Technologies Ltd.
+  issue_tracker_url: https://github.com/transitiv/ansible-role-zrepl/issues
+  travis_status_url: https://github.com/transitiv/ansible-role-zrepl/workflows/CI/badge.svg
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - stretch
+        - buster    
+  galaxy_tags:
+    - zrepl
+    - zfs
+    - backups
+    - replication
+    - snapshots
+
+dependencies: []

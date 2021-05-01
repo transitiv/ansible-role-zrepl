@@ -1,0 +1,14 @@
+---
+- name: Install zrepl package repository
+  yum_repository:
+    name: zrepl
+    description: zrepl
+    baseurl: https://zrepl.cschwarz.com/rpm/repo
+    gpgkey: https://zrepl.cschwarz.com/rpm/rpm-key.asc
+    gpgcheck: yes
+
+- name: Install zrepl
+  yum:
+    name: zrepl
+    state: present
+    update_cache: yes

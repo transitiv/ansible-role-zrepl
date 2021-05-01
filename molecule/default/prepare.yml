@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: Install required packages on Debian
+      apt:
+        name:
+          # required to support HTTPS repositories on Debian stretch
+          - apt-transport-https
+          # required to add key to apt keyring
+          - gnupg
+          # required for pgrep in verify.yml
+          - procps
+        update_cache: true
+      when: ansible_os_family == 'Debian'
